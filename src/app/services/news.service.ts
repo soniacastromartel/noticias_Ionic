@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Article, NewsRespone } from '../interfaces/index';
+import {map} from 'rxjs/operators';
 
 
 const apiKey= environment.apiKey;
@@ -14,7 +17,13 @@ export class NewsService {
 
    }
 
-   getTopHeadLines(){
-     return this.http.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`);
+   getTopHeadLines(): Observable<Article[]> {
+     return this.http.get<NewsRespone>(`https://newsapi.org/v2/top-headlines?country=us&category=business`,{
+       params: {
+         apiKey
+       }
+     }).pipe(
+       map(({articles}) => articles)
+     );
    }
 }
