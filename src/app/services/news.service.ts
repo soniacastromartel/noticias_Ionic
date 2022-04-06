@@ -26,4 +26,15 @@ export class NewsService {
        map(({articles}) => articles)
      );
    }
+
+   getTopHeadLinesByCategory(category: string): Observable<Article[]> {
+
+    return this.http.get<NewsRespone>(`https://newsapi.org/v2/top-headlines?country=us&category=${category}`,{
+      params: {
+        apiKey
+      }
+    }).pipe(
+      map(({articles}) => articles)
+    );
+   }
 }
