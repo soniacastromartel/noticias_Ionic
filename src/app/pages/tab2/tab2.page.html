@@ -12,15 +12,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment [value]="selectedCategory" (ionChange)="segmentChanged($event)" scrollable="true"
-  mode="md">
-    <ion-segment-button *ngFor="let category of categories"
-    [value]="category">
+  <ion-segment [value]="selectedCategory" (ionChange)="segmentChanged($event)" scrollable="true" mode="md">
+    <ion-segment-button *ngFor="let category of categories" [value]="category">
       <ion-label class="ion-text-capitalize">{{category}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <app-articles [articles]="articles"></app-articles>
 
+  <ion-infinite-scroll threshold="25%"  position="bottom" (ionInfinite)="loadData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando noticias...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
