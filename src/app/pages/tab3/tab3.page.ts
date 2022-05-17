@@ -10,7 +10,7 @@ import { StorageService } from 'src/app/services/storage.service';
 export class Tab3Page {
 
   get articles(): Article[] {
-    return this.storageSvc.localArticles;
+    return this.storageSvc.getLocalArticles;
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
   constructor(private storageSvc: StorageService) {

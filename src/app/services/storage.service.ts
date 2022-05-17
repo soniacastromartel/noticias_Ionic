@@ -22,7 +22,7 @@ export class StorageService {
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  get localArticles() {
+  get getLocalArticles() {
     return [...this._localArticles];
   }
 
@@ -51,6 +51,10 @@ export class StorageService {
 console.log(error);
     }
 
+  }
+
+  articleInFavorites(article: Article) {
+    return !!this._localArticles.find(localArticle => localArticle.title === article.title);
   }
 
 
