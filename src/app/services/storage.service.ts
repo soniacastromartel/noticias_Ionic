@@ -18,6 +18,12 @@ export class StorageService {
     const storage = await this.storage.create();
     // eslint-disable-next-line no-underscore-dangle
     this._storage = storage;
+    this.loadFavorites();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get localArticles() {
+    return [...this._localArticles];
   }
 
   async saveRemoveArticle(article: Article) {
@@ -35,4 +41,17 @@ export class StorageService {
 
     this._storage.set('articles', this._localArticles);
   }
+
+  async loadFavorites(){
+    try {
+      const articles = await this._storage.get('articles');
+      this._localArticles = articles || [];
+
+    } catch (error) {
+console.log(error);
+    }
+
+  }
+
+
 }
